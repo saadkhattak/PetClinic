@@ -32,9 +32,9 @@ node {
         junit allowEmptyResults: true, testResults: '**/surefire-reports/*.xml'
     }
     stage('Deploy To Tomcat'){
-        sshagent(['app-server']) {
-            sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@ec2-52-70-39-48.compute-1.amazonaws.com:/opt/apache-tomcat-8.5.38/webapps/'
-        }
+       sshagent(['tomcat-dev']) {
+         sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.7.148:/opt/tomcat/webapps/'
+      }
     }
     stage('Smoke Test'){
         sleep 5
